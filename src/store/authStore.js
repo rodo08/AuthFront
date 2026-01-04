@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import axios from "axios";
+import { create } from 'zustand';
+import axios from 'axios';
 
-const API_URL = "http://localhost:3000/api/auth";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/auth`;
 
 axios.defaults.withCredentials = true;
 
@@ -25,8 +25,7 @@ export const useAuthStore = create((set) => ({
       set({ user: response.data, isAuthenticated: true, isLoading: false });
     } catch (error) {
       set({
-        isLoading: false,
-        error: error.response.data.message || "Error signing up",
+        error: error.response.data.message || 'Error signing up',
         isLoading: false,
       });
 
@@ -46,7 +45,7 @@ export const useAuthStore = create((set) => ({
       return response.data;
     } catch (error) {
       set({
-        error: error.response.data.message || "Error verifying email",
+        error: error.response.data.message || 'Error verifying email',
         isLoading: false,
       });
       throw error;
@@ -84,7 +83,7 @@ export const useAuthStore = create((set) => ({
       });
     } catch (error) {
       set({
-        error: error.response?.data?.message || "Error logging in",
+        error: error.response?.data?.message || 'Error logging in',
         isLoading: false,
       });
       throw error;
@@ -106,7 +105,7 @@ export const useAuthStore = create((set) => ({
         isLoading: false,
       });
     } catch (error) {
-      set({ error: "Error logging out", isLoading: false });
+      set({ error: 'Error logging out', isLoading: false });
       throw error;
     }
   },
@@ -122,7 +121,7 @@ export const useAuthStore = create((set) => ({
       set({
         isLoading: false,
         error:
-          error.response.data.message || "Error sending reset password email",
+          error.response.data.message || 'Error sending reset password email',
       });
       throw error;
     }
@@ -137,7 +136,7 @@ export const useAuthStore = create((set) => ({
     } catch (error) {
       set({
         isLoading: false,
-        error: error.response.data.message || "Error resetting password",
+        error: error.response.data.message || 'Error resetting password',
       });
       throw error;
     }

@@ -32,7 +32,7 @@ const EmailVerificationPage = () => {
       setCode(newCode);
 
       // Move focus to the next input field if value is entered
-      if (value && index < 5) {
+      if (value && index < 6) {
         inputRefs.current[index + 1].focus();
       }
     }
@@ -59,7 +59,13 @@ const EmailVerificationPage = () => {
   // Auto submit when all fields are filled
   useEffect(() => {
     if (code.every((digit) => digit !== '')) {
-      handleSubmit(new Event('submit'));
+      const verificationCode = code.join('');
+      verifyEmail(verificationCode)
+        .then(() => {
+          navigate('/');
+          toast.success('Email verified successfully');
+        })
+        .catch(console.log);
     }
   }, [code]);
 
@@ -85,7 +91,7 @@ const EmailVerificationPage = () => {
                 key={index}
                 ref={(el) => (inputRefs.current[index] = el)}
                 type="text"
-                maxLength="7"
+                maxLength="1"
                 value={digit}
                 onChange={(e) => handleChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}

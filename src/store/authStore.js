@@ -22,10 +22,10 @@ export const useAuthStore = create((set) => ({
         name,
       });
 
-      set({ user: response.data, isAuthenticated: true, isLoading: false });
+      set({ user: response.data.user, isAuthenticated: true, isLoading: false });
     } catch (error) {
       set({
-        error: error.response.data.message || 'Error signing up',
+        error: error.response?.data?.message || 'Error signing up',
         isLoading: false,
       });
 
@@ -53,8 +53,6 @@ export const useAuthStore = create((set) => ({
   },
 
   checkAuth: async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     set({ isCheckingAuth: true, error: null });
     try {
       const response = await axios.get(`${API_URL}/check-auth`);
@@ -121,7 +119,7 @@ export const useAuthStore = create((set) => ({
       set({
         isLoading: false,
         error:
-          error.response.data.message || 'Error sending reset password email',
+          error.response?.data?.message || 'Error sending reset password email',
       });
       throw error;
     }
@@ -136,7 +134,7 @@ export const useAuthStore = create((set) => ({
     } catch (error) {
       set({
         isLoading: false,
-        error: error.response.data.message || 'Error resetting password',
+        error: error.response?.data?.message || 'Error resetting password',
       });
       throw error;
     }

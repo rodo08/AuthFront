@@ -1,5 +1,7 @@
 # MERN Auth — Frontend
 
+**Live demo:** https://stupendous-auth.netlify.app/login
+
 React client for the MERN authentication system. Handles signup, login, email verification, and password reset, communicating with the [backend API](https://github.com/rodo08/AuthBack) via HTTP-only cookie sessions.
 
 ## Stack

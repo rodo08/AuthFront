@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api/auth`;
 
@@ -55,13 +56,16 @@ export const useAuthStore = create((set) => ({
   checkAuth: async () => {
     set({ isCheckingAuth: true, error: null });
     try {
-      const response = await axios.get(`${API_URL}/check-auth`, { timeout: 10000 });
+      const response = await axios.get(`${API_URL}/check-auth`, { timeout: 5000 });
       set({
         user: response.data.user,
         isAuthenticated: true,
         isCheckingAuth: false,
       });
     } catch (error) {
+      if (error.code === 'ECONNABORTED') {
+        toast.error('Server is starting up, please try again in a moment.');
+      }
       set({ error: null, isCheckingAuth: false, isAuthenticated: false });
     }
   },

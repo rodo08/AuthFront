@@ -14,8 +14,11 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    await login(email, password);
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,7 +51,7 @@ const LoginPage = () => {
 
           <div className="flex items-center mb-6">
             <Link
-              to="/reset-password"
+              to="/forgot-password"
               className="text-green-400 hover:underline "
             >
               Forgot Password?

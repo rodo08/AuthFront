@@ -1,6 +1,6 @@
 # MERN Auth — Frontend
 
-React client for the MERN authentication system. Handles signup, login, email verification, and password reset, communicating with the [backend API](../backend/README.md) via HTTP-only cookie sessions.
+React client for the MERN authentication system. Handles signup, login, email verification, and password reset, communicating with the [backend API](https://github.com/rodo08/AuthBack) via HTTP-only cookie sessions.
 
 ## Stack
 
